@@ -16,8 +16,22 @@ namespace PC_Parts_Inventory_Management_System
         {
             InitializeComponent();
             dgvInventory.DataSource = inventoryList;
+            dgvInventory.Columns["Price"].DefaultCellStyle.Format = "₱#,##0.00";
             PopulateCategoryDropdown();
 
+        }
+
+        private void textBox4_Leave(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(textBox4.Text.Replace("₱", "").Replace(",", ""), out decimal price))
+            {
+                textBox4.Text = price.ToString("₱#,##0.00");
+            }
+        }
+
+        private void textBox4_Enter(object sender, EventArgs e)
+        {
+            textBox4.Text = textBox4.Text.Replace("₱", "").Replace(",", "");
         }
 
         private void buttonExport_Click(object sender, EventArgs e)
@@ -75,7 +89,7 @@ namespace PC_Parts_Inventory_Management_System
                 Manufacturer = comboBox2.Text,
                 Model = textBox2.Text,
                 Specs = textBox3.Text,
-                Price = Convert.ToDecimal(textBox4.Text),
+                Price = Convert.ToDecimal(textBox4.Text.Replace("₱", "").Replace(",", "")),
                 Stock = Convert.ToInt32(textBox5.Text)
             };
 

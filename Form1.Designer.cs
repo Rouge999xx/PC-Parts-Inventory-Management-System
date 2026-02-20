@@ -148,6 +148,8 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(155, 23);
             textBox4.TabIndex = 10;
+            textBox4.Enter += textBox4_Enter;
+            textBox4.Leave += textBox4_Leave;
             // 
             // textBox5
             // 
